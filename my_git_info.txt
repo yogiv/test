@@ -1,0 +1,306 @@
+
+Use this to link plink to bitbucket.
+
+GIT_SSH=plink
+
+plink ygaur@bitbucket.org:vubeology
+
+**********************************************************************************
+Here's an algorithm that seems to work fine:
+
+Create your feature branch off the develop branch - in my case, it's "feature-upload". In your working git directory:
+$ git checkout -b feature-upload develop
+
+... do whatever work I need to do with the files ...
+
+Commit the changes  to the feature branch:
+$ git commit -am "I just added a line to a file"
+
+Switch back  to develop:
+$ git checkout develop
+
+Merge the changes to develop  with no fast forward (what that means: http://i.stack.imgur.com/vRdkr.png):
+$ git merge --no-ff feature-upload
+
+**********************************************************************************
+
+Discard all unstaged files use:
+
+git checkout -- .
+*********************************************
+
+C:\Users\yogesh\Documents\vube.db>git push origin feature-vube-183
+
+Creates a remote branch.
+
+Enter passphrase for key '/c/cygwin/home/yogesh/.ssh/id_rsa':
+Counting objects: 13, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (7/7), 727 bytes, done.
+Total 7 (delta 2), reused 0 (delta 0)
+remote: bb/acl: ygaur is allowed. accepted payload.
+To git@bitbucket.org:vubeology/vube.db.git
+ * [new branch]      feature-vube-183 -> feature-vube-183
+ 
+
+ **********************************************************************************
+ Pull from a remote branch.....
+ 
+ git pull origin feature-vube-183
+
+ 
+ 
+ 
+
+***************************************************************
+Get your settings....
+
+git config --list
+****************************************************************
+
+Cloning into the current directory.
+
+git clone git@bitbucket.org:vubeology/vube.www.git           .
+
+
+*****************************************************************
+github account 
+
+yogiv
+
+yogesh@vubeology.com
+
+suman123
+
+************************************************************
+In ~/.profile set 
+
+umask 002
+
+
+*************************************************************
+
+Do work on "develop" branch
+
+git clone ssh://git@bitbucket.org/vubeology/sandbox.git
+
+
+
+git clone git@bitbucket.org:vubeology/vube.git
+
+Git has a number of different transfer protocols you can use. The previous example uses the 
+git:// protocol, but you 
+may also see http(s):// 
+or user@server:/path.git, which uses the SSH transfer protocol.
+
+************************************************************
+
+Hi Guys,
+
+Please try this process. It should work to forward to keys to the linux machines.
+
+
+* On windows run "pageant" (this is available where putty is downloaded from.   
+* In the "pageant program in the task bar.. Add your private key to it.
+
+* Make sure in putty "Allow agent forwarding is checked"
+
+* Now use putty to login to banana.
+
+* rmdir .ssh (from your home if it exists)
+
+* ssh-add-l
+
+* You can try if this is working by doing a git clone. For example ----
+
+git clone ssh://git@bitbucket.org/vubeology/sandbox.git
+
+I have enclosed some screen shots. Please let me know, if you run into any issues.
+
+**************************************************************************************
+
+
+set home variable so .ssh directory can be found by git
+
+HOME=C:\cygwin\home\yogesh
+
+************************************************************
+git diff --staged
+
+**************************************************************
+
+git config --global core.excludesfile C:\Users\yogesh\.gitignore
+
+From Ari ---
+
+ari@banana:~$ cat .gitignore_global
+*~
+.DS_Store
+.project
+.settings
+
+**************************************************************
+
+
+Skipping the Staging Area
+Although it can be amazingly useful for crafting commits exactly how you want them, the staging 
+area is sometimes a bit more complex than you need in your workflow. If you want to skip the 
+staging area, Git provides a simple shortcut. Providing the -a option to the git commit command 
+makes Git automatically stage every file that is already tracked before doing the commit, letting 
+you skip the git add part:
+
+**************************************************************
+Removing files..
+
+rm try.txt
+
+git rm try.txt
+
+git status
+
+This is particularly useful if you forgot to add something to your .gitignore file and 
+accidentally staged it, like a large log file or a bunch of .a compiled files. To do this, 
+use the --cached option:
+
+$ git rm --cached readme.txt
+
+******************************************************************
+
+Moving files --
+
+If you want to rename a file in Git, you can run something like
+
+$ git mv file_from file_to
+
+******************************************************************
+
+git log --stat
+
+git log --pretty=format:"%h - %an, %ar : %s"
+
+ Another really useful option is --pretty. This option changes the log output to formats other 
+ than the default. A few prebuilt options are available for you to use. The oneline option 
+ prints each commit on a single line, which is useful if you’re looking at a lot of commits. 
+ In addition, the short, full, and fuller options show the output in roughly the same format 
+ but with less or more information, respectively:
+
+ Option  Description of Output
+%H  Commit hash
+%h  Abbreviated commit hash
+%T  Tree hash
+%t  Abbreviated tree hash
+%P  Parent hashes
+%p  Abbreviated parent hashes
+%an Author name
+%ae Author e-mail
+%ad Author date (format respects the --date= option)
+%ar Author date, relative
+%cn Committer name
+%ce Committer email
+%cd Committer date
+%cr Committer date, relative
+%s  Subject
+ 
+******************************************************************
+Changing your last commit
+
+As an example, if you commit and then realize you forgot to stage the changes in a file you 
+wanted to add to this commit, you can do something like this:
+
+$ git commit -m 'initial commit'
+$ git add forgotten_file
+$ git commit --amend
+
+ Even commits that were on branches that were deleted or commits that were overwritten with an 
+ --amend commit can be recovered (see Chapter 9 for data recovery). However, anything you lose 
+ that was never committed is likely never to be seen again.
+
+******************************************************************
+
+Unstaging a Staged File
+
+git reset HEAD try.txt
+
+******************************************************************
+
+Unmodifying a modified file
+
+git checkout -- try.txt
+
+******************************************************************
+
+To see which remote servers you have configured, you can run the git remote command. It lists 
+the shortnames of each remote handle you’ve specified. If you’ve cloned your repository, you 
+should at least see origin — that is the default name Git gives to the server you cloned from:
+
+C:\Users\yogesh\Documents\sandbox>git remote -v
+origin  ssh://git@bitbucket.org/vubeology/sandbox.git (fetch)
+origin  ssh://git@bitbucket.org/vubeology/sandbox.git (push)
+
+
+******************************************************************
+
+Fetching and pulling from remotes
+
+git fetch origin
+
+git pull command to automatically fetch and then merge a remote branch into your current branch. 
+This may be an easier or more comfortable workflow for you; and by default, the git clone command 
+automatically sets up your local master branch to track the remote master branch on the server 
+you cloned from (assuming the remote has a master branch). Running git pull generally fetches 
+data from the server you originally cloned from and automatically tries to merge it into the code 
+you’re currently working on.
+
+******************************************************************
+
+Pushing to your remotes
+
+When you have your project at a point that you want to share, you have to push it upstream. 
+The command for this is simple: git push [remote-name] [branch-name]. If you want to push 
+your master branch to your origin server (again, cloning generally sets up both of those names 
+for you automatically), then you can run this to push your work back up to the server:
+
+$ git push origin master
+
+******************************************************************
+
+Tagging -- listing your tags  
+
+git tag
+
+searching for specific tags..
+
+git tag -l 'v1.4.2.*
+
+Creating an annotated tag in Git is simple. 
+
+ git tag -a v0.0
+ 
+ By default, the git push command doesn’t transfer tags to remote servers. You will have to 
+ explicitly push tags to a shared server after you have created them. This process is just 
+ like sharing remote branches — you can run git push origin [tagname].
+
+$ git push origin v1.5
+******************************************************************
+
+Git aliases
+
+git config --global  alias.co checkout
+
+now you can use -- git co
+
+******************************************************************
+
+
+Let’s say you create a new branch called testing. You do this with
+the git branch command:
+$ git branch testing
+
+*********************************************************************
+
+apt-get install git-core
+
+***********************************************************************
+
+

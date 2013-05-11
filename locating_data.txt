@@ -1,0 +1,21 @@
+On celery 
+
+cd  /usr/local/vube/wwww/thevube.com/dev_old_test/yogi
+
+
+
+C:\Users\yogesh\Documents\vube\MySQL\databases\users\tables\user_channel_list.sql
+
+
+
+C:\Users\yogesh\Documents\users\cj4\redis_test\protected\models\VideoModel.php
+
+****************************************************************************************
+
+On  Amaranth
+
+/usr/local/vube/www/thevube.com/dev/carl/redis_test
+
+*****************************************************************************************
+
+
